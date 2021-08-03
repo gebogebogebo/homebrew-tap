@@ -12,7 +12,7 @@ FIDO2 Authenticator Tool
   - [SoloKey](https://github.com/solokeys/solo)
   - Nitrokey FIDO2
   - [OpenSK](https://github.com/google/OpenSK)
-  - Idem Key
+  - GoTrust Idem Key
 
 
 
@@ -63,21 +63,30 @@ Once the PIN retry counter reaches 0, built-in user verification are disabled an
 ### Set new PIN
 
 ```zsh
-gebo ~ % ctapcli pin -n 1234
+% ctapcli pin -n
 PIN Management.
 
 Set new PIN.
 
-Error: PIN is already set.
+new PIN:
+xxxx
+
+Success! :)
 ```
 
 ### Change PIN
 
 ```zsh
-gebo ~ % ctapcli pin -c 1234 5678
+% ctapcli pin -c
 PIN Management.
 
 Change PIN.
+
+current PIN:
+xxxx
+
+new PIN:
+zzzz
 
 Success! :)
 ```
@@ -94,23 +103,23 @@ Enumerate FIDO key
 ### Record some short texts in Authenticator
 
 ```zsh
-gebo ~ % ctapcli memo -p 1234 -a test this-is-test-memo.
+% ctapcli memo -a test this-is-test-memo 
 Record some short texts in Authenticator.
 
+PIN: 
 - touch fido key
 Add Success!.
 
-
-gebo ~ % ctapcli memo -p 1234
+% ctapcli memo                          
 Record some short texts in Authenticator.
 
-List All Memos.
-(1/10)
+PIN: 
+
 - test
+(1/10)
 
-
-gebo ~ % ctapcli memo -p 1234 -g test
-Record some short texts in Authenticator.
+tag:
+test
 
 Get a memo => test.
 Copied it to the clipboard :) :) :) !
