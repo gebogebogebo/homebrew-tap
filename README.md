@@ -3,7 +3,10 @@
 FIDO2 Authenticator Tool
 
 - for macOS
+
 - Supported FIDO key
+
+  - [Yubikey Bio](https://www.yubico.com/products/yubikey-bio-series/)
   - Yubikey Blue (Security Key Series)
   - Yubikey Black (YubiKey 5)
   - FEITIAN ePass FIDO(A4B)
@@ -14,7 +17,7 @@ FIDO2 Authenticator Tool
   - [OpenSK](https://github.com/google/OpenSK)
   - GoTrust Idem Key
 
-
+  
 
 ## Install
 
@@ -28,13 +31,34 @@ brew install ctapcli
 ## Usage Example
 
 ```zsh
-ctapcli -h
+% ctapcli -h
+
+USAGE:
+    ctapcli [FLAGS] [SUBCOMMAND]
+
+FLAGS:
+    -d, --device     Enumerate HID devices
+    -f, --fidokey    Enumerate FIDO key
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+    -w, --wink       Blink the LED on the FIDO key
+
+SUBCOMMANDS:
+    bio     Bio management
+            - List registered biometric authenticate data. without any FLAGS and OPTIONS.
+    help    Prints this message or the help of the given subcommand(s)
+    info    Get Authenticator infomation
+            - List All Infomation without any FLAGS and OPTIONS.
+    memo    Record some short texts in Authenticator
+            - Get a Memo without any FLAGS and OPTIONS.
+    pin     PIN management
+            - Get PIN retry counter without any FLAGS and OPTIONS.
 ```
 
 ### Get the Authenticator PIN infomation.
 
 ```zsh
-gebo ~ % ctapcli info -g pin
+% ctapcli info -g pin
 Get the Authenticator infomation.
 
 option pin = true
@@ -45,7 +69,7 @@ This authenticator is capable of accepting a PIN from the client and PIN has bee
 ### Get PIN retry counter
 
 ```zsh
-gebo ~ % ctapcli pin        
+% ctapcli pin        
 PIN Management.
 
 Get PIN retry counter.
@@ -69,7 +93,7 @@ PIN Management.
 Set new PIN.
 
 new PIN:
-xxxx
+[xxxx]
 
 Success! :)
 ```
@@ -83,10 +107,10 @@ PIN Management.
 Change PIN.
 
 current PIN:
-xxxx
+[xxxx]
 
 new PIN:
-zzzz
+[zzzz]
 
 Success! :)
 ```
@@ -94,7 +118,7 @@ Success! :)
 ### Get HID info
 
 ```zsh
-gebo ~ % ctapcli -f
+% ctapcli -f
 
 Enumerate FIDO key
 - vid=0x1050 , pid=0x0402 , "product=YubiKey FIDO usage_page=61904 usage=1 serial_number="
@@ -102,26 +126,37 @@ Enumerate FIDO key
 
 ### Record some short texts in Authenticator
 
-```zsh
-% ctapcli memo -a test this-is-test-memo 
+```shell
+% ctapcli memo -a
 Record some short texts in Authenticator.
 
-PIN: 
-- touch fido key
-Add Success!.
-
-% ctapcli memo                          
-Record some short texts in Authenticator.
-
-PIN: 
-
-- test
-(1/10)
+Add a memo.
+PIN: [xxxx]
 
 tag:
 test
 
-Get a memo => test.
+memo:
+hoge
+
+- Touch the sensor on the authenticator
+Add Success! :)
+```
+
+```shell
+% ctapcli memo   
+Record some short texts in Authenticator.
+
+Get a memo.
+PIN: [xxxx]
+
+- test
+- aaa
+(2/10)
+
+tag:
+[test]
+
 Copied it to the clipboard :) :) :) !
 ```
 
